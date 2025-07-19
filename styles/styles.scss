@@ -1,0 +1,293 @@
+/* Variables */
+$font: "lexend", Arial, Helvetica, sans-serif;
+$gris: #999;
+$grisOscuro: #333;
+$blanco: #fff;
+
+
+/* Mixins */
+@mixin flex-space {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+@mixin width ($width) {
+    width: $width;
+}
+
+@mixin font-size ($fontSize) {
+    font-size: $fontSize;
+}
+
+@mixin font-weight ($fontWeight) {
+    font-weight: $fontWeight;
+}
+
+@mixin padding ($padding) {
+    padding: $padding;
+}
+
+@mixin margin ($margin) {
+    margin: $margin;
+}
+
+/* Clases Placeholders */
+%box-sizing {
+    box-sizing: border-box;
+}
+
+%cursor-pointer {
+    cursor: pointer;
+}
+
+
+body {
+    @include width(100%);    
+    @include font-size(15px); 
+    @include font-weight(300); 
+    color: $gris; 
+    font-family: $font; 
+    @include margin(0); 
+}
+
+
+/* header */
+
+.header {
+    @include width(100%); 
+    @include padding(20px 50px); 
+    background-color: $grisOscuro; 
+    @include flex-space;
+    @extend %box-sizing;
+
+    &__iconos {
+        @include width(30px); 
+        @extend %cursor-pointer; 
+        display: inline-block; 
+    }
+
+    &__logo {
+        @include width(100px);
+    }
+
+    i img {
+        @include width(100%); 
+    }
+}
+
+
+/* banner */
+
+.banner {
+    @include width(100%); 
+    @include padding(70px 0); 
+    text-align: center; 
+    background-image: url("../img/postertematico-de-adidas.webp"); 
+    background-repeat: no-repeat; 
+    background-size: cover; 
+    color: $grisOscuro;
+    background-position-y: 17%; 
+
+    &__title {
+        @include width(100%); 
+        @include font-weight(600); 
+        @include font-size(30px); 
+        @include margin(10px); 
+    }
+
+    &__text {
+        @include width(100%); 
+        @include margin(0 auto); 
+        @include font-size(25px); 
+        opacity: 0.8; 
+    }
+
+}
+
+
+/* productos */
+
+.products {
+    @include width(80%); 
+    @include margin(0 auto); 
+    @include padding(20px); 
+    @extend %box-sizing; 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+
+    &__article {
+        @extend %cursor-pointer; 
+        text-align: center; 
+    }
+
+    &__img {
+        height: 200px; 
+        margin-bottom: 15px;
+    }
+
+    &__title {
+        @include font-weight(500); 
+        @include font-size(17px);
+        margin-bottom: 5px; 
+    }
+
+    &__paragraph {
+        @include font-weight(300px); 
+        @include font-size(15px); 
+    }
+}
+
+
+/* carrito */
+
+.cart {
+    @include width(500px); 
+    background-color: $blanco; 
+    @include padding(25px); 
+    @extend %box-sizing; 
+    height: 100%; 
+    position: fixed; 
+    right: -100%; 
+    top: 100px; 
+    box-shadow: -19px  -1px 22px -15px rgba(0, 0, 0, 0.30);
+    
+    &__title {
+        @include width(100%); 
+        text-align: center; 
+        @include font-size(20px); 
+        @include font-weight(600); 
+        padding: 25px 0; 
+        @extend %box-sizing; 
+    }
+
+    &__div {
+        border-bottom: 1px solid $grisOscuro; 
+        @include flex-space;   
+        @include padding(15px); 
+        @extend %box-sizing;
+    }
+
+    &__img {
+        @include width(60px); 
+        height: 100; 
+    }
+
+    div p:nth-child(3) {
+        @include font-weight(500);
+    }
+
+    div img {
+        @extend %cursor-pointer; 
+    }
+
+    .delete-icono {
+        @include width(50px); 
+    }
+}
+
+
+/* Responsividad Tablets*/
+
+@media (max-width: 820px) {
+
+    /* header */
+    .header {
+        &--padding {
+            @include padding(15px); 
+        }
+
+        & > img { 
+            @include width(60px); 
+        }
+    }
+
+
+    /* products */
+    
+    .products {
+        &--columns {
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+        }
+
+        &--img {
+            @include width(150px); 
+        }
+    }
+
+
+    /* Cars */
+
+    .cart {
+        &--modifier {
+            @include width(400px); 
+            top: 80px; 
+        }
+    }
+}  
+
+
+/* Responsividad para celular */
+
+@media (max-width: 480px) {
+
+    /* banner */
+    .banner {
+        &--padding--modifier {
+            @include padding(30px 0); 
+        }
+
+        &__title--modifier {
+            @include font-size(16px); 
+        }
+    }
+
+
+    /* products */
+
+    .products {
+        &--col {
+            grid-template-columns: 1fr; 
+            @include padding(10px); 
+        }
+
+        &__img--modifier {
+            @include width(100%); 
+            max-width: 200px; 
+            margin-bottom: 10px; 
+        }
+
+        &__title--modifier,
+        &__paragraph--modifier {
+            @include padding(0 10px);
+        }    
+    }
+
+
+    /* cart */
+
+    .cart {
+        &__section--modifier {
+            @include width(100%); 
+            box-shadow: none; 
+        }
+
+        &__title--modifier {
+            @include font-weight(700);
+            @include padding(15px 0);
+        }
+
+        &__div--modifier {
+            flex-direction: column; 
+            align-items: center;
+        }
+
+        &__img--modifier {
+            @include width(100px); 
+        }
+
+        &__paragraph--modifier {
+            @include margin(0); 
+        }
+    }
+}
